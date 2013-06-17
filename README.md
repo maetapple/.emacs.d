@@ -2,6 +2,6 @@
 
 ## USAGE
 
- % git clone https://github.com/Hatajoe/.emacs.d.git
+ % git clone https://github.com/maetapple/.emacs.d.git
 
 
