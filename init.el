@@ -1,3 +1,37 @@
+;---------------------
+; language settings
+;---------------------
+(set-language-environment 'Japanese)
+(prefer-coding-system 'utf-8)
+
+
+;---------------------
+; font settings
+;---------------------
+(create-fontset-from-ascii-font "Menlo-12:weight=normal:slant=normal" nil "menlokakugo")
+(set-fontset-font "fontset-menlokakugo"
+                  'unicode
+                  (font-spec :family "Hiragino Kaku Gothic ProN" :size 12)
+                  nil
+                  'append)
+(add-to-list 'default-frame-alist '(font . "fontset-menlokakugo"))
+
+;; フォント
+;; abcdefghijklmnopqrstuvwxyz 
+;; ABCDEFGHIJKLMNOPQRSTUVWXYZ
+;; `1234567890-=\[];',./
+;; ~!@#$%^&*()_+|{}:"<>?
+;;
+;; 壱弐参四五壱弐参四五壱弐参四五壱弐参四五壱弐参四五壱弐参四五
+;; 123456789012345678901234567890123456789012345678901234567890
+;; ABCdeＡＢＣｄｅ
+;;
+;; ┌───────────────────────────┐
+;; │                                           罫線
+;; └───────────────────────────┘
+;;
+
+
 ;------------------
 ; package settings
 ;------------------
@@ -113,8 +147,8 @@
 ;; indent space is not evil
 (setq-default indent-tabs-mode nil)
 
-;; tab width is 4
-(setq-default tab-width 4)
+;; tab width is 2
+(setq-default tab-width 2)
 
 ;; auto revert buffer
 (global-auto-revert-mode 1)
@@ -147,14 +181,42 @@
 (cua-mode t)
 (setq cua-enable-cua-keys nil)
 
+;; color-theme
+(require 'color-theme)
+(color-theme-initialize)
+;(color-theme-charcoal-black)
+(color-theme-deep-blue)
+;(color-theme-midnight)
+
+;; frame parameter
+ (set-frame-parameter (selected-frame) 'alpha '(80 50))
+;; (add-to-list 'default-frame-alist '(alpha . (0.75 0.75)))
+
+
+;;------------------------------------
+;; トラックパッド用のスクロール設定
+;;------------------------------------
+(defun scroll-down-with-lines ()
+  "" (interactive) (scroll-down 3))
+(defun scroll-up-with-lines ()
+  "" (interactive) (scroll-up 3))
+(global-set-key [wheel-up] 'scroll-down-with-lines)
+(global-set-key [wheel-down] 'scroll-up-with-lines)
+(global-set-key [double-wheel-up] 'scroll-down-with-lines)
+(global-set-key [double-wheel-down] 'scroll-up-with-lines)
+(global-set-key [triple-wheel-up] 'scroll-down-with-lines)
+(global-set-key [triple-wheel-down] 'scroll-up-with-lines)
+
+
+
 ;------------------
 ; elisp settings
 ;------------------
 
 ;; color-theme
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-ir-black)
+;(require 'color-theme)
+;(color-theme-initialize)
+;(color-theme-ir-black)
 
 ;; moccur-edit
 (require 'moccur-edit)
